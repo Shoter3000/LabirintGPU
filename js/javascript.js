@@ -200,18 +200,20 @@ document.addEventListener("DOMContentLoaded", function () {
     let y = 1;
     let animating = false;
     let crta = 0;
+    let prevX = null;
+    let prevY = null;
     
     const img = new Image();
     img.src = 'img/hdmi.png';
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(234, 2);
 
     function animatePath() {
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext("2d");
         const resitev = [234,2, 234,10, 202,10, 202,42, 186,42, 186,138, 170,138, 170,122, 154,122, 154,138, 138,138, 138,202, 154,202, 154,218, 138,218, 138,250, 122,250, 122,266, 26,266, 26,282, 74,282, 74,298, 90,298, 90,314, 74,314, 74,330, 90,330, 90,346, 58,346, 58,362, 106,362, 106,346, 122,346, 122,330, 138,330, 138,362, 186,362, 186,282, 202,282, 202,330, 218,330, 218,346, 202,346, 202,378, 186,378, 186,394, 218,394, 218,410, 234,410, 234,442, 202,442, 202,458, 266,458, 266,474, 250,474, 250,482];
         
         let speed = document.querySelector("#myRange").value;
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         if (x < resitev.length - 2) {
             const startX = resitev[x];
@@ -228,16 +230,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
             ctx.strokeStyle = "rgb(32, 32, 32)";
             ctx.lineWidth = 5;
-            ctx.beginPath();
-            ctx.moveTo(startX, startY);
+
             ctx.lineTo(vmesx, vmesy);
             ctx.stroke();
-            ctx.closePath();
 
+            if (prevX !== null && prevY !== null) {
+                ctx.clearRect(prevX - img.width / 2, prevY - img.height / 2, img.width, img.height);
+            }
+            ctx.drawImage(img, vmesx - img.width / 2, vmesy - img.height / 2);
+            
             ctx.fillStyle = "rgb(32, 32, 32)";
             ctx.fillRect(startX - ctx.lineWidth / 2, startY - ctx.lineWidth / 2, ctx.lineWidth, ctx.lineWidth);
             
-            ctx.drawImage(img, vmesx - img.width / 2, vmesy - img.height / 2);
+            prevX = vmesx;
+            prevY = vmesy;
             
             if (crta >= 1) {
                 x += 2;
@@ -261,6 +267,8 @@ document.addEventListener("DOMContentLoaded", function () {
         x = 0;
         y = 1;
         crta = 0;
+        prevX = null;
+        prevY = null;
         
         if (!animating) {
             animating = true;
