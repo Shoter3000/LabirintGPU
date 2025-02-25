@@ -1,3 +1,20 @@
+//sweetalert
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.sweet').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Razvijalec',
+            text: 'Nejc Vidmar',
+            icon: 'info',
+            confirmButtonText: 'Zapri',
+            customClass: {
+                confirmButton: 'swal-button',
+                icon: 'custom-icon'
+            }
+        });
+    });
+});
+
+
 //narisi
 document.addEventListener("DOMContentLoaded", function (event) {
     let x = 0;
@@ -11,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext("2d");
         const resitev = [234,2, 234,10, 202,10, 202,42, 186,42, 186,138, 170,138, 170,122, 154,122, 154,138, 138,138, 138,202, 154,202, 154,218, 138,218, 138,250, 122,250, 122,266, 26,266, 26,282, 74,282, 74,298, 90,298, 90,314, 74,314, 74,330, 90,330, 90,346, 58,346, 58,362, 106,362, 106,346, 122,346, 122,330, 138,330, 138,362, 186,362, 186,282, 202,282, 202,330, 218,330, 218,346, 202,346, 202,378, 186,378, 186,394, 218,394, 218,410, 234,410, 234,442, 202,442, 202,458, 266,458, 266,474, 250,474, 250,482];
-        ctx.strokeStyle = "rgb(127, 172, 255)";
+        ctx.strokeStyle = "rgb(32, 32, 32)";
         ctx.lineWidth = 5;
 
         input = document.querySelector("#myRange").value;
@@ -45,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             ctx.closePath();
 
             //narise kvadratek v kotih da so napolnjeni
-            ctx.fillStyle = "rgb(127, 172, 255)";
+            ctx.fillStyle = "rgb(32, 32, 32)";
             ctx.fillRect(startX - ctx.lineWidth / 2, startY - ctx.lineWidth / 2, ctx.lineWidth, ctx.lineWidth);
 
             //ko pride do konca črte jo konča
@@ -56,20 +73,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
             requestAnimationFrame(narisi);
         } else {
-            //konec
-
-            /* fix ce na koncu ni dovolj
-            const lastX = resitev[x];
-            const lastY = resitev[y];
-            ctx.fillStyle = "rgb(127, 172, 255)";
-            ctx.fillRect(lastX - ctx.lineWidth / 2, lastY - ctx.lineWidth / 2, ctx.lineWidth, ctx.lineWidth);*/
-            //nazaj enabla gumbe
+            //konec animacije
             animating = false;
             document.getElementById('start').disabled = false;
             document.getElementById('oboje').disabled = false;
             document.getElementById('erase').disabled = false;
-            document.getElementById('sprite').disabled = false;
             document.getElementById('slika').disabled = false;
+            document.getElementById('change').src = 'img/monitor.png';
         }
     }
 
@@ -90,8 +100,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.disabled = true;
             document.getElementById("erase").disabled = true;
             document.getElementById("oboje").disabled = true;
-            document.getElementById("sprite").disabled = true;
             document.getElementById("slika").disabled = true;
+            document.getElementById('change').src = 'img/monitor.gif';
             narisi();
         }
     });
@@ -159,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             animatingdel = false;
             document.getElementById('start').disabled = false;
             document.getElementById('oboje').disabled = false;
-            document.getElementById('sprite').disabled = false;
             document.getElementById('slika').disabled = false;
         }
     }
@@ -178,8 +187,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.disabled = true;
             document.getElementById("start").disabled = true;
             document.getElementById("oboje").disabled = true;
-            document.getElementById("sprite").disabled = true;
             document.getElementById("slika").disabled = true;
+            document.getElementById('change').src = 'img/monitor.gif';
             izbrisi();
         }
     });
@@ -217,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const vmesx = startX + (endX - startX) * crta;
             const vmesy = startY + (endY - startY) * crta;
 
-            ctx.strokeStyle = "rgb(127, 172, 255)";
+            ctx.strokeStyle = "rgb(32, 32, 32)";
             ctx.lineWidth = 5;
             ctx.beginPath();
             ctx.moveTo(startX, startY);
@@ -225,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.stroke();
             ctx.closePath();
 
-            ctx.fillStyle = "rgb(127, 172, 255)";
+            ctx.fillStyle = "rgb(32, 32, 32)";
             ctx.fillRect(startX - ctx.lineWidth / 2, startY - ctx.lineWidth / 2, ctx.lineWidth, ctx.lineWidth);
             
             ctx.drawImage(img, vmesx - img.width / 2, vmesy - img.height / 2);
@@ -239,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
             requestAnimationFrame(animatePath);
         } else {
             animating = false;
+            document.getElementById('change').src = 'img/monitor.png';
             document.querySelectorAll("button").forEach(btn => btn.disabled = false);
         }
     }
@@ -256,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
             animating = true;
             document.querySelectorAll("button").forEach(btn => btn.disabled = true);
             this.disabled = true;
+            document.getElementById('change').src = 'img/monitor.gif';
             animatePath();
         }
     });
@@ -313,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("start").disabled = false;
             document.getElementById("slika").disabled = false;
             document.getElementById("oboje").disabled = false;
-            document.getElementById("sprite").disabled = false;
+            document.getElementById('change').src = 'img/monitor.png';
         }
     }
 
@@ -333,117 +344,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             animating = true;
             this.disabled = true;
             document.getElementById("start").disabled = true;
-            document.getElementById("sprite").disabled = true;
             document.getElementById("oboje").disabled = true;
             document.getElementById("erase").disabled = true;
+            document.getElementById('change').src = 'img/monitor.gif';
             moveImage();
-        }
-    });
-});
-
-
-//sprite
-document.addEventListener("DOMContentLoaded", function () {
-    let x = 0;
-    let y = 1;
-    let animating = false;
-    let crta = 0;
-
-    const frameWidth = 16;
-    const frameHeight = 16;
-    const totalFrames = 8;
-    let currentFrame = 0;
-    const frameRate = 8;
-    let frameCounter = 0;
-
-
-    const sprite = new Image();
-    sprite.src = "img/cd_007_small_sprite.png";
-
-    function animateSprite() {
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        const resitev = [234,2, 234,10, 202,10, 202,42, 186,42, 186,138, 170,138, 170,122, 154,122, 154,138, 138,138, 138,202, 154,202, 154,218, 138,218, 138,250, 122,250, 122,266, 26,266, 26,282, 74,282, 74,298, 90,298, 90,314, 74,314, 74,330, 90,330, 90,346, 58,346, 58,362, 106,362, 106,346, 122,346, 122,330, 138,330, 138,362, 186,362, 186,282, 202,282, 202,330, 218,330, 218,346, 202,346, 202,378, 186,378, 186,394, 218,394, 218,410, 234,410, 234,442, 202,442, 202,458, 266,458, 266,474, 250,474, 250,482];
-
-        input = document.querySelector("#myRange").value;
-        speed = input;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (x < resitev.length - 2) {
-            const startX = resitev[x];
-            const startY = resitev[y];
-            const endX = resitev[x + 2];
-            const endY = resitev[y + 2];
-
-            const dolzinaCrte = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
-            crta += speed / dolzinaCrte;
-
-            if (crta > 1) crta = 1;
-
-            const vmesx = startX + (endX - startX) * crta;
-            const vmesy = startY + (endY - startY) * crta;
-
-            //koliko hitro se bo spreminjal
-            frameCounter++;
-            if (frameCounter >= 60 / frameRate) {
-                frameCounter = 0;
-                currentFrame = (currentFrame + 1) % totalFrames;
-            }
-
-
-            const frameX = (currentFrame * frameWidth) % sprite.width;
-            const frameY = Math.floor((currentFrame * frameWidth) / sprite.width) * frameHeight;
-
-
-            ctx.drawImage(
-                sprite,
-                frameX,
-                frameY,
-                frameWidth,
-                frameHeight,
-                vmesx - frameWidth / 2,
-                vmesy - frameHeight / 2,
-                frameWidth,
-                frameHeight
-            );
-
-            if (crta >= 1) {
-                x += 2;
-                y += 2;
-                crta = 0;
-            }
-
-            requestAnimationFrame(animateSprite);
-        } else {
-            animating = false;
-            document.getElementById("start").disabled = false;
-            document.getElementById("slika").disabled = false;
-            document.getElementById("oboje").disabled = false;
-            document.getElementById("sprite").disabled = false;
-        }
-    }
-
-    document.getElementById("sprite").addEventListener("click", function () {
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        x = 0;
-        y = 1;
-        crta = 0;
-
-        let input = document.querySelector("#myRange").value;
-        speed = input;
-
-        if (!animating) {
-            animating = true;
-            this.disabled = true;
-            document.getElementById("start").disabled = true;
-            document.getElementById("slika").disabled = true;
-            document.getElementById("oboje").disabled = true;
-            document.getElementById("erase").disabled = true;
-            animateSprite();
         }
     });
 });
