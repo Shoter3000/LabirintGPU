@@ -170,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById('start').disabled = false;
             document.getElementById('oboje').disabled = false;
             document.getElementById('slika').disabled = false;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     }
 
@@ -181,8 +182,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         crtadel = 0;
         let input = document.querySelector("#myRange").value;
         speed = input;
-
-        if (!animatingdel) {
+        if (document.getElementById("slika").disabled) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('change').src = 'img/monitor.gif';
+            document.getElementById("erase").disabled = true;
+        }
+        else if (!animatingdel) {
             animatingdel = true;
             this.disabled = true;
             document.getElementById("start").disabled = true;
@@ -255,7 +260,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             animating = false;
             document.getElementById('change').src = 'img/monitor.png';
-            document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+            document.getElementById("start").disabled = false;
+            document.getElementById("oboje").disabled = true;
+            document.getElementById("erase").disabled = false;
+            document.getElementById("slika").disabled = false;
         }
     }
 
@@ -330,8 +338,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         } else {
             animating = false;
             document.getElementById("start").disabled = false;
-            document.getElementById("slika").disabled = false;
+            document.getElementById("slika").disabled = true;
             document.getElementById("oboje").disabled = false;
+            document.getElementById("erase").disabled = false;
             document.getElementById('change').src = 'img/monitor.png';
         }
     }
