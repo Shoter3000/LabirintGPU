@@ -8,5 +8,8 @@ Projekt **Labirint** je interaktivni spletni labirint, kjer uporabnik izbira raz
 - **CSS**: Oblikovanje spletne strani
 - **JavaScript**: Animacije od starta do cilja, zaznavanje uporabniških ukazov
 
+## Razvijalec
+Nejc Vidmar
+
 ## Licenca
-MIT 
+MIT LICENSE
