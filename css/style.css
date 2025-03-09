@@ -123,12 +123,12 @@ body {
 }
 
 
-.gpu {
+.sprite {
     display: flex;
     justify-content: center;
 }
 
-.gpu-img {
+.sprite-img {
     width: 50%;
     height: auto;
 }

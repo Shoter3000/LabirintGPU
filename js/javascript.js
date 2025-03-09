@@ -368,3 +368,47 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     });
 });
+
+
+class SpriteAnimator {
+    constructor(imageSrc, frameHeight, totalFrames, frameRate, canvasId) {
+        this.image = new Image();
+        this.image.src = imageSrc;
+        this.frameHeight = frameHeight;
+        this.totalFrames = totalFrames;
+        this.frameRate = frameRate;
+        this.currentFrame = 0;
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext("2d");
+
+        this.image.onload = () => {
+            this.startAnimation();
+        };
+
+        this.image.onerror = () => {
+            console.error("Failed to load image:", imageSrc);
+        };
+    }
+
+    startAnimation() {
+        this.currentFrame = 0;
+        this.intervalId = setInterval(() => this.updateFrame(), 1000 / this.frameRate);
+    }
+
+    updateFrame() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(
+            this.image,
+            0, this.currentFrame * this.frameHeight,
+            this.image.width, this.frameHeight,
+            0, 0,
+            this.canvas.width, this.canvas.height
+        );
+
+        this.currentFrame = (this.currentFrame + 1) % this.totalFrames;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    new SpriteAnimator("img/sprite.png", 340, 7, 120, "spriteCanvas");
+});
