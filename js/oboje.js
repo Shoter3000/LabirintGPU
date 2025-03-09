@@ -1,4 +1,7 @@
-//oboje
+/*oboje
+
+//useless code u can delete dis file - Ben
+
 document.addEventListener("DOMContentLoaded", function () {
     let x = 0;
     let y = 1;
@@ -84,4 +87,4 @@ document.addEventListener("DOMContentLoaded", function () {
             animatePath();
         }
     });
-});
+});*/
