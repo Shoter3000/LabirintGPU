@@ -126,6 +126,7 @@ body {
 .sprite {
     display: flex;
     justify-content: center;
+    margin-left: 10px;
 }
 
 .sprite-img {
@@ -136,6 +137,7 @@ body {
 .monitor {
     display: flex;
     justify-content: center;
+    margin-left: 10px;
 }
 
 .monitor-img {

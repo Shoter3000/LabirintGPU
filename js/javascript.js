@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementById("start").disabled = false;
             document.getElementById("slika").disabled = true;
             document.getElementById("oboje").disabled = false;
-            document.getElementById("erase").disabled = false;
+            document.getElementById("erase").disabled = true;
             document.getElementById('change').src = 'img/monitor.png';
         }
     }
